@@ -1,0 +1,44 @@
+@baseUrl = http://localhost:3000
+@urlPath = api/v1
+
+###
+GET {{baseUrl}}/{{urlPath}}/images/<userId>
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+###
+POST {{baseUrl}}/{{urlPath}}/images/profile
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "image": "<base64-encoded-string>"
+}
+
+###
+POST {{baseUrl}}/{{urlPath}}/images/background
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+# For this endpoint, image value is either
+# - a base64 encoded string for a new image or
+# - an already existing cloudinary image url
+
+{
+  "image": ""
+}
+
+###
+DELETE {{baseUrl}}/{{urlPath}}/images/<imageId>
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+###
+DELETE {{baseUrl}}/{{urlPath}}/images/background/<bgImageId>
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
