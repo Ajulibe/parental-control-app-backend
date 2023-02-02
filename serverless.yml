@@ -1,0 +1,35 @@
+service: parental-control-backend
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-west-3
+  stage: dev
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http: ANY /{proxy+}
+      - http: ANY /
+    environment:
+      JWT_TOKEN: thisisatokenfromme
+      NODE_ENV: development
+      SECRET_KEY_ONE: thisisasecretkeyone
+      SECRET_KEY_TWO: thisisasecretkeyone
+      CLIENT_URL: http://localhost:3000
+      TOKEN_EXPIRY: 1500
+      CLOUD_NAME: ajulibe
+      CLOUD_API_KEY: 731597918821489
+      CLOUD_API_SECRET: AcXuOE_dzhkVt61C8nPXynivag4
+      SENDER_EMAIL: kristian74@ethereal.email
+      SENDER_EMAIL_PASSWORD: d1td1CnYYVjyQvbxf8
+
+package:
+  exclude:
+    - node_modules/**
+    - endpoints/**
+    - migrations/**
+    - models/**
+    - seeders/**

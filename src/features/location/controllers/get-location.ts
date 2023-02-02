@@ -4,7 +4,7 @@ import { Location } from '@root/features/location/model/location.model';
 
 export class Get {
   public async read(req: Request, res: Response, next: NextFunction): Promise<void> {
-    const { device_id } = req.body;
+    const { device_id } = req.params;
     try {
       const location_data = await Location.findOne({
         where: { device_id }
@@ -16,7 +16,7 @@ export class Get {
         res.status(HTTP_STATUS.NOT_FOUND).json({ data: [] });
       }
     } catch (error) {
-      res.status(HTTP_STATUS.BAD_REQUEST).json({ message: error });
+      next(error);
     }
   }
 }

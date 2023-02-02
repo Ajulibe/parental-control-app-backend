@@ -9,15 +9,16 @@ export class Update {
   public async update(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { device_id, latitude, longitude } = req.body;
     try {
-      const updated_location = await Location.update(
+      await Location.update(
         { latitude, longitude },
         {
           where: { device_id }
         }
       );
-      res.status(HTTP_STATUS.OK).json({ data: updated_location });
+      const updated_location = await Location.findOne({ where: { device_id } });
+      res.status(HTTP_STATUS.OK).json({ message: 'Sucessfully Updated', data: updated_location });
     } catch (error) {
-      res.status(HTTP_STATUS.BAD_REQUEST).json({ message: error });
+      next(error);
     }
   }
 }

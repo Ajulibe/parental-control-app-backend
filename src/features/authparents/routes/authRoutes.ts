@@ -1,5 +1,6 @@
 import { Login } from '@authparents/controllers/login';
 import { Register } from '@authparents/controllers/register';
+import { SignOut } from '@authparents/controllers/signout';
 import express, { Router } from 'express';
 
 class AuthParentRoutes {
@@ -11,7 +12,8 @@ class AuthParentRoutes {
 
   public routes(): Router {
     this.router.post('/register', Register.prototype.create);
-    this.router.post('/auth-login', Login.prototype.create);
+    this.router.post('/login', Login.prototype.create);
+    this.router.post('/signout', SignOut.prototype.update);
     return this.router;
   }
 }

@@ -10,11 +10,11 @@ import { config } from '@root/config';
 import Logger from 'bunyan';
 import { Server } from 'socket.io';
 import { createClient } from 'redis';
-import { createAdapter } from '@socket.io/redis-adapter';
+// import { createAdapter } from '@socket.io/redis-adapter';
 import applicationRoutes from '@root/routes';
 import { CustomError, IErrorResponse } from '@global/helpers/error-handler';
 import morgan from '@global/helpers/morgan';
-// import { SocketIOPostHandler } from '@socket/post.txt';
+import { SocketIOPostHandler } from '@socket/events';
 
 const SERVER_PORT = 3000;
 const log: Logger = config.createLogger('server');
@@ -49,7 +49,7 @@ export class ChattyServer {
     app.use(helmet());
     app.use(
       cors({
-        origin: config.CLIENT_URL,
+        origin: '*',
         credentials: true,
         optionsSuccessStatus: 200,
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
@@ -106,15 +106,18 @@ export class ChattyServer {
     try {
       const httpServer: http.Server = new http.Server(app);
       const socketIO: Server = await this.createSocketIO(httpServer);
+      socketIO.on('connection', (socket) => {
+        console.log(socket, 'a user connected');
+      });
       this.startHttpServer(httpServer);
-      // this.socketIOConnections(socketIO);
+      this.socketIOConnections(socketIO);
     } catch (error) {
       log.error(error);
     }
   }
 
-  private startHttpServer(httpServer: http.Server): void {
-    // log.info(`Server has started with process ${process.pid}`);
+  private async startHttpServer(httpServer: http.Server): Promise<void> {
+    log.info(`Server has started with process ${process.pid}`);
     httpServer.listen(SERVER_PORT, () => {
       log.info(`Server running on port ${SERVER_PORT}`);
     });
@@ -129,19 +132,19 @@ export class ChattyServer {
   private async createSocketIO(httpServer: http.Server): Promise<Server> {
     const io: Server = new Server(httpServer, {
       cors: {
-        origin: config.CLIENT_URL,
+        origin: 'http://localhost:4000',
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
       }
     });
-    const pubClient = createClient({ url: config.REDIS_HOST });
-    const subClient = pubClient.duplicate();
-    await Promise.all([pubClient.connect(), subClient.connect()]);
-    io.adapter(createAdapter(pubClient, subClient));
+    // const pubClient = createClient({ url: config.REDIS_HOST });
+    // const subClient = pubClient.duplicate();
+    // await Promise.all([pubClient.connect(), subClient.connect()]);
+    // io.adapter(createAdapter(pubClient, subClient));
     return io;
   }
 
-  // private socketIOConnections(io: Server): void {
-  //   const postSocketHandler: SocketIOPostHandler = new SocketIOPostHandler(io);
-  //   postSocketHandler.listen();
-  // }
+  private socketIOConnections(io: Server): void {
+    const postSocketHandler: SocketIOPostHandler = new SocketIOPostHandler(io);
+    postSocketHandler.listen();
+  }
 }

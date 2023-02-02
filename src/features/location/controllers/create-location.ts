@@ -9,18 +9,16 @@ export class Create {
   public async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { device_id, latitude, longitude } = req.body;
     try {
-      const [location_data, created] = await Location.findOrCreate({
-        where: { device_id },
-        defaults: { device_id, latitude, longitude }
-      });
+      const existingLocation = await Location.findOne({ where: { device_id } });
 
-      if (created) {
-        res.status(HTTP_STATUS.CREATED).json({ data: location_data });
+      if (!existingLocation) {
+        const locationData = await Location.create({ id: 452454, device_id, latitude, longitude });
+        res.status(HTTP_STATUS.CREATED).json({ data: locationData });
       } else {
-        res.status(HTTP_STATUS.NOT_FOUND).json({ data: [] });
+        res.status(HTTP_STATUS.OK).json({ data: existingLocation });
       }
     } catch (error) {
-      res.status(HTTP_STATUS.BAD_REQUEST).json({ message: error });
+      next(error);
     }
   }
 }

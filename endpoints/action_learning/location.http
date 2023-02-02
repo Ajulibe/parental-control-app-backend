@@ -1,0 +1,39 @@
+@baseUrl = http://localhost:3000
+@urlPath = api/v1
+
+@accessToken = yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbF9hZGRyZXNzIjoiYmVuaml0ZXN0aW5nT25lQHlhaG9vLmNvbSIsImNoaWxkX25hbWUiOiJqZWFuLWNsYXVkZSIsInBhc3N3b3JkIjoicjNmY3JmcmYiLCJpYXQiOjE2NzUyNTQ4MDJ9.eoFHNvdEPKnaa42BFxuOmrLmpQbEAVofmToRyK5ssRs
+
+
+###
+POST {{baseUrl}}/{{urlPath}}/create-location
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "latitude": "-0.3421",
+  "longitude": "-0.7635",
+  "device_id": "dw134134341341ded"
+}
+
+###
+GET {{baseUrl}}/{{urlPath}}/get-location/dw134134341341ded
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+
+
+
+###
+POST {{baseUrl}}/{{urlPath}}/update-location
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "latitude": "-0.3444",
+  "longitude": "-0.778687",
+  "device_id": "dw134134341341ded"
+}
+

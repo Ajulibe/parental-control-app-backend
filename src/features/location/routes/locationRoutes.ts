@@ -13,7 +13,7 @@ class LocationRoutes {
 
   public routes(): Router {
     this.router.post('/create-location', authMiddleware.checkAuthentication, Create.prototype.create);
-    this.router.post('/get-location', authMiddleware.checkAuthentication, Get.prototype.read);
+    this.router.get('/get-location/:device_id', authMiddleware.checkAuthentication, Get.prototype.read);
     this.router.post('/update-location', authMiddleware.checkAuthentication, Update.prototype.update);
     return this.router;
   }

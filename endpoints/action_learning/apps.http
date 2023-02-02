@@ -1,0 +1,110 @@
+@baseUrl = http://localhost:3000
+@urlPath = api/v1
+
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzJiMTQ4MzZmOGJmYjVmYzA5YjA4OWEiLCJ1SWQiOiI4ODQ5NTczNDI3ODAiLCJlbWFpbCI6ImZ3ZWZAeWFob28uY29tIiwidXNlcm5hbWUiOiJCZW5qaSIsImF2YXRhckNvbG9yIjoiZHdkZWQiLCJpYXQiOjE2NjM5NDEyNTN9.gVlvpkHpfIAyID4keGnjJXqV_6jyUe1d5G0QLlmtmDA
+
+
+###
+POST {{baseUrl}}/{{urlPath}}/add-apps
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+[
+{
+"installed_app_name": "com.mymobile.web",
+"app_status": "inactive",
+"device_id": "dw134134341341ded"
+},
+{
+"installed_app_name": "com.teamviewer.android",
+"app_status": "active",
+"device_id": "dw134134341341ded"
+}]
+
+###
+GET {{baseUrl}}/{{urlPath}}/get-apps/dw134134341341ded
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+
+###
+POST {{baseUrl}}/{{urlPath}}/update-app-status
+Content-Type: application/jsonx
+Accept: application/json
+withCredentials: true
+
+{
+"installed_app_name": "com.mymobile.web",
+"app_status": "inactive",
+"device_id": "dw134134341341ded"
+}
+
+
+
+
+# {
+# "installed_app_name": "com.snapchat.android",
+# "app_status": "inddactive",
+# "device_id": "dw134134341341ded"
+# }
+
+
+
+
+
+#Here's an array of 10 dummy objects:
+
+# [
+# {
+# "installed_app_name": "com.facebook.react",
+# "app_status": "active",
+# "device_id": "dw134134341341ded"
+# },
+# {
+# "installed_app_name": "com.google.maps",
+# "app_status": "active",
+# "device_id": "dw134134341341ded"
+# },
+# {
+# "installed_app_name": "com.whatsapp.web",
+# "app_status": "active",
+# "device_id": "dw134134341341ded"
+# },
+# {
+# "installed_app_name": "com.snapchat.android",
+# "app_status": "active",
+# "device_id": "dw134134341341ded"
+# },
+# {
+# "installed_app_name": "com.twitter.android",
+# "app_status": "active",
+# "device_id": "dw134134341341ded"
+# },
+# {
+# "installed_app_name": "com.instagram.android",
+# "app_status": "active",
+# "device_id": "dw134134341341ded"
+# },
+# {
+# "installed_app_name": "com.pinterest.android",
+# "app_status": "active",
+# "device_id": "dw134134341341ded"
+# },
+# {
+# "installed_app_name": "com.tiktok.android",
+# "app_status": "active",
+# "device_id": "dw134134341341ded"
+# },
+# {
+# "installed_app_name": "com.spotify.music",
+# "app_status": "active",
+# "device_id": "dw134134341341ded"
+# },
+# {
+# "installed_app_name": "com.github.mobile",
+# "app_status": "active",
+# "device_id": "dw134134341341ded"
+# }
+# ]

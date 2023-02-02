@@ -5,11 +5,13 @@ module.exports = {
     await queryInterface.createTable('children', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
+        autoIncrement: true,
         type: Sequelize.INTEGER
       },
       device_id: {
+        primaryKey: true,
+        unique: true,
         type: Sequelize.STRING
       },
       child_name: {

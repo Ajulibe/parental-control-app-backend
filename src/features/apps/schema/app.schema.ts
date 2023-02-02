@@ -10,9 +10,10 @@ const appSchema: ObjectSchema = Joi.object().keys({
     'string.base': 'installedAppName must be of type string',
     'string.empty': 'installedAppName is a required field'
   }),
-  app_status: Joi.string().required().messages({
+  app_status: Joi.string().valid('active', 'inactive').required().messages({
     'string.base': 'appStatus must be of type string',
-    'string.empty': 'appStatus is a required field'
+    'string.empty': 'appStatus is a required field',
+    'any.only': 'appStatus can only be "active" or "inactive"'
   })
 });
 

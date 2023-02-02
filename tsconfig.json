@@ -23,6 +23,7 @@
     "paths": {
       "@auth/*": ["src/features/auth/*"],
       "@authparents/*": ["src/features/authparents/*"],
+      "@children/*": ["src/features/children/*"],
       "@location/*": ["src/features/location/*"],
       "@apps/*": ["src/features/apps/*"],
       "@user/*": ["src/features/user/*"],

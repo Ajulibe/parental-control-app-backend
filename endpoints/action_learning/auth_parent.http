@@ -8,22 +8,30 @@ Accept: application/json
 withCredentials: true
 
 {
-  "email_address": "benji@yahoo.com",
+  "email_address": "benjitestingOne@yahoo.com",
   "password": "r3fcrfrf",
   "child_name": "jean-claude",
   "device_id": "dw134134341341ded"
 }
 
 ###
-POST {{baseUrl}}/{{urlPath}}/auth-login
+POST {{baseUrl}}/{{urlPath}}/login
 Content-Type: application/json
 Accept: application/json
 withCredentials: true
 
 {
-  "email_address": "benji@yahoo.com",
+  "email_address": "benjitestingOne@yahoo.com",
   "password": "r3fcrfrf",
   "child_name": "jean-claude"
 }
 
+
+
+
+###
+POST {{baseUrl}}/{{urlPath}}/signout
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
 

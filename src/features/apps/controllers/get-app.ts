@@ -4,14 +4,14 @@ import { Apps } from '@apps/model/apps.model';
 
 export class Get {
   public async read(req: Request, res: Response, next: NextFunction): Promise<void> {
-    const { device_id } = req.body;
+    const { device_id } = req.params;
     try {
-      const location_data = await Apps.findOne({
+      const apps_data = await Apps.findAll({
         where: { device_id }
       });
 
-      if (location_data) {
-        res.status(HTTP_STATUS.OK).json({ data: location_data });
+      if (apps_data) {
+        res.status(HTTP_STATUS.OK).json({ data: apps_data });
       } else {
         res.status(HTTP_STATUS.NOT_FOUND).json({ data: [] });
       }

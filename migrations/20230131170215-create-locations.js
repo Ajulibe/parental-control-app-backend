@@ -10,6 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       device_id: {
+        unique: true,
         type: Sequelize.STRING
       },
       latitude: {

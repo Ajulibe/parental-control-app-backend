@@ -1,11 +1,11 @@
-import { Column, DataType, Model, Table, CreatedAt, UpdatedAt, PrimaryKey } from 'sequelize-typescript';
+import { Column, DataType, Model, Table, CreatedAt, UpdatedAt, Unique, PrimaryKey } from 'sequelize-typescript';
 
 @Table({ tableName: 'app_details' })
 export class Apps extends Model {
+  @PrimaryKey
   @Column({
     type: DataType.INTEGER,
     autoIncrement: true,
-    primaryKey: true,
     allowNull: false
   })
   id!: number;

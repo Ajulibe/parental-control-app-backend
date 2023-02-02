@@ -22,6 +22,8 @@ class Config {
   public SENDGRID_API_KEY: string | undefined;
   public SENDGRID_SENDER: string | undefined;
   public EC2_URL: string | undefined;
+  public AWS_COGNITO_SECRET_HASH: string;
+  public AWS_COGNITO_APP_CLIENT_ID: string;
 
   private readonly DEFAULT_DATABASE_URL = 'mongodb://localhost:27017/chattyapp-backend';
 
@@ -31,7 +33,7 @@ class Config {
     this.NODE_ENV = process.env.NODE_ENV || '';
     this.SECRET_KEY_ONE = process.env.SECRET_KEY_ONE || '';
     this.SECRET_KEY_TWO = process.env.SECRET_KEY_TWO || '';
-    this.CLIENT_URL = process.env.CLIENT_URL || '';
+    this.CLIENT_URL = process.env.CLIENT_URL || '3001';
     this.REDIS_HOST = process.env.REDIS_HOST || '';
     this.CLOUD_NAME = process.env.CLOUD_NAME || '';
     this.CLOUD_API_KEY = process.env.CLOUD_API_KEY || '';
@@ -42,6 +44,8 @@ class Config {
     this.SENDGRID_SENDER = process.env.SENDGRID_SENDER || '';
     this.EC2_URL = process.env.EC2_URL || '';
     this.TOKEN_EXPIRY = process.env.TOKEN_EXPIRY || '';
+    this.AWS_COGNITO_SECRET_HASH = process.env.AWS_COGNITO_SECRET_HASH || '';
+    this.AWS_COGNITO_APP_CLIENT_ID = process.env.AWS_COGNITO_APP_CLIENT_ID || '';
   }
 
   public createLogger(name: string): bunyan {

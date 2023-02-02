@@ -1,20 +1,21 @@
-import { Column, CreatedAt, DataType, Model, Table, UpdatedAt } from 'sequelize-typescript';
+import { Column, CreatedAt, DataType, Model, PrimaryKey, Table, Unique, UpdatedAt } from 'sequelize-typescript';
 
-@Table
+@Table({ tableName: 'locations' })
 export class Location extends Model {
+  @PrimaryKey
   @Column({
     type: DataType.INTEGER,
-    primaryKey: true,
     autoIncrement: true,
     allowNull: false
   })
   id!: number;
 
+  @Unique
   @Column({
     type: DataType.STRING,
     allowNull: false
   })
-  deviceId!: string;
+  device_id!: string;
 
   @Column({
     type: DataType.FLOAT,

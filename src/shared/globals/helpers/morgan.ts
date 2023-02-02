@@ -3,7 +3,7 @@ import { Response, Request } from 'express';
 import Logger from 'bunyan';
 import { config } from '@root/config';
 
-const log: Logger = config.createLogger('setupDatabase');
+const log: Logger = config.createLogger('morgan Looger');
 
 morgan.token('message', (_req: Request, res: Response) => res.locals.errorMessage || '');
 

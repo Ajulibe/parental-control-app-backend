@@ -1,8 +1,16 @@
-import { Column, DataType, Model, Table, CreatedAt, UpdatedAt, PrimaryKey } from 'sequelize-typescript';
+import { Column, DataType, Model, Table, CreatedAt, UpdatedAt, PrimaryKey, Unique } from 'sequelize-typescript';
 
 @Table({ tableName: 'children' })
 export class Children extends Model {
   @PrimaryKey
+  @Column({
+    type: DataType.INTEGER,
+    autoIncrement: true,
+    allowNull: false
+  })
+  id!: number;
+
+  @Unique
   @Column({ type: DataType.STRING, allowNull: false })
   device_id!: string;
 
@@ -18,5 +26,3 @@ export class Children extends Model {
   @UpdatedAt
   updatedAt!: Date;
 }
-
-export default Children;
