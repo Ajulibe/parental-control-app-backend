@@ -9,8 +9,6 @@ import HTTP_STATUS from 'http-status-codes';
 import { config } from '@root/config';
 import Logger from 'bunyan';
 import { Server } from 'socket.io';
-import { createClient } from 'redis';
-// import { createAdapter } from '@socket.io/redis-adapter';
 import applicationRoutes from '@root/routes';
 import { CustomError, IErrorResponse } from '@global/helpers/error-handler';
 import morgan from '@global/helpers/morgan';
@@ -118,9 +116,9 @@ export class ChattyServer {
 
   private async startHttpServer(httpServer: http.Server): Promise<void> {
     log.info(`Server has started with process ${process.pid}`);
-    // httpServer.listen(SERVER_PORT, () => {
-    //   log.info(`Server running on port ${SERVER_PORT}`);
-    // });
+    httpServer.listen(SERVER_PORT, () => {
+      log.info(`Server running on port ${SERVER_PORT}`);
+    });
   }
 
   /*=============================================
@@ -136,10 +134,6 @@ export class ChattyServer {
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
       }
     });
-    // const pubClient = createClient({ url: config.REDIS_HOST });
-    // const subClient = pubClient.duplicate();
-    // await Promise.all([pubClient.connect(), subClient.connect()]);
-    // io.adapter(createAdapter(pubClient, subClient));
     return io;
   }
 

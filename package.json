@@ -4,6 +4,11 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "npm run build && pm2 start build/app.js -i 2 --attach --watch | ./node_modules/.bin/bunyan",
+    "stop": "pm2 stop all",
+    "build:watch": "npm run build -- -W",
+    "monitor": "pm2 monit",
+    "delete": "pm2 delete all",
     "dev": "nodemon -r tsconfig-paths/register ./app.ts | ./node_modules/.bin/bunyan",
     "lint:check": "eslint 'src/**/*.ts'",
     "lint:fix": "eslint 'src/**/*.ts' --fix",

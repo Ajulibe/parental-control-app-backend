@@ -1,13 +1,13 @@
 @baseUrl = http://localhost:3000
 @urlPath = api/v1
 
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzJiMTQ4MzZmOGJmYjVmYzA5YjA4OWEiLCJ1SWQiOiI4ODQ5NTczNDI3ODAiLCJlbWFpbCI6ImZ3ZWZAeWFob28uY29tIiwidXNlcm5hbWUiOiJCZW5qaSIsImF2YXRhckNvbG9yIjoiZHdkZWQiLCJpYXQiOjE2NjM5NDEyNTN9.gVlvpkHpfIAyID4keGnjJXqV_6jyUe1d5G0QLlmtmDA
-
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbF9hZGRyZXNzIjoiYmVuaml0ZXN0aW5nT25lQHlhaG9vLmNvbSIsImNoaWxkX25hbWUiOiJqZWFuLWNsYXVkZSIsInBhc3N3b3JkIjoicjNmY3JmcmYiLCJpYXQiOjE2NzUzNzEzODZ9.vEgh9cbNQBLHjxHKq4Bm6PjvUNhoHC60Gu8HsL1f24E
 
 ###
 POST {{baseUrl}}/{{urlPath}}/add-apps
 Content-Type: application/json
 Accept: application/json
+Authorization: {{accessToken}}
 withCredentials: true
 
 [

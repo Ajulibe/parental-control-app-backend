@@ -9,7 +9,6 @@ class AuthParentService {
     next: NextFunction
   ): Promise<{ parent: AuthorisedParent | null; child: Children | null }> {
     const { email_address, password, child_name } = data;
-    console.log(email_address, password, child_name);
 
     let parent: AuthorisedParent | null = null;
     let child: Children | null = null;

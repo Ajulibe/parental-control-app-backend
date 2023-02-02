@@ -2,11 +2,10 @@ import { Request, Response, NextFunction } from 'express';
 import JWT from 'jsonwebtoken';
 import { config } from '@root/config';
 import { NotAuthorizedError } from '@global/helpers/error-handler';
-import { AuthPayload } from '@auth/interfaces/auth.interface';
-import { Helpers } from '@global/helpers/helpers';
+import { AuthPayload } from '@authparents/interfaces/auth.interface';
 import Logger from 'bunyan';
 
-const log: Logger = config.createLogger('suthMiddleWare');
+const log: Logger = config.createLogger('authMiddleWare');
 export class AuthMiddleware {
   public verifyUser(req: Request, res: Response, next: NextFunction): void {
     if (!req.headers?.authorization) {
@@ -14,7 +13,6 @@ export class AuthMiddleware {
     }
     try {
       const BearerToken = req.session?.jwt || req.headers?.authorization;
-      log.info(BearerToken);
       if (req.headers?.authorization) {
         const payload: AuthPayload = JWT.verify(BearerToken, config.JWT_TOKEN!) as AuthPayload;
         req.currentUser = payload;

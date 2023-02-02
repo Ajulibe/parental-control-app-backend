@@ -14,7 +14,7 @@ export class Login {
       const { parent, child } = await authParentService.loginAuthParent(req.body, next);
       const userJwt: string = Login.prototype.signToken({ ...req.body });
       req.session = { jwt: userJwt };
-      res.status(HTTP_STATUS.OK).json({ message: 'Successfully Logged in', data: [parent, child], token: userJwt });
+      res.status(HTTP_STATUS.OK).json({ message: 'Successfully Logged in', data: [{ parent, child }], token: userJwt });
     } catch (error) {
       next(error);
     }

@@ -13,7 +13,7 @@ class AuthParentRoutes {
   public routes(): Router {
     this.router.post('/register', Register.prototype.create);
     this.router.post('/login', Login.prototype.create);
-    this.router.post('/test', Login.prototype.testing);
+    this.router.get('/testing', Login.prototype.testing);
     this.router.post('/signout', SignOut.prototype.update);
     return this.router;
   }

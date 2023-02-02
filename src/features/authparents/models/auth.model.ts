@@ -1,5 +1,7 @@
-import { Column, DataType, Model, Table, CreatedAt, UpdatedAt, PrimaryKey, Unique } from 'sequelize-typescript';
+import { Column, DataType, Model, Table, CreatedAt, UpdatedAt, PrimaryKey, Unique, BeforeCreate, BeforeUpdate } from 'sequelize-typescript';
+import { hash, compare } from 'bcryptjs';
 
+const SALT_ROUND = 10;
 @Table({ tableName: 'authorised_parents' })
 export class AuthorisedParent extends Model {
   @PrimaryKey
@@ -25,4 +27,16 @@ export class AuthorisedParent extends Model {
 
   @UpdatedAt
   updatedAt!: Date;
+
+  // @BeforeCreate
+  // @BeforeUpdate
+  // static async hashPassword(instance: AuthorisedParent) {
+  //   if (instance.changed('password')) {
+  //     instance.password = await hash(instance.password, 10);
+  //   }
+  // }
+
+  // async comparePassword(password: string) {
+  //   return compare(password, this.password);
+  // }
 }
