@@ -12,12 +12,22 @@ const log: Logger = config.createLogger('setupDatabase');
 let connection: Sequelize;
 
 export default () => {
+  // connection = new Sequelize({
+  //   dialect: 'postgres',
+  //   host: 'localhost',
+  //   username: 'postgres',
+  //   password: 'postgres',
+  //   database: 'action_learning',
+  //   logging: false,
+  //   models: [AuthorisedParent, AppsModel, LocationModel, ChildrenModel]
+  // });
+
   connection = new Sequelize({
     dialect: 'postgres',
-    host: 'localhost',
-    username: 'postgres',
-    password: 'postgres',
-    database: 'action_learning',
+    host: process.env.PGHOST,
+    username: process.env.PGUSER,
+    password: process.env.PGPASSWORD,
+    database: process.env.PGDATABASE,
     logging: false,
     models: [AuthorisedParent, AppsModel, LocationModel, ChildrenModel]
   });

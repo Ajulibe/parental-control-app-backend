@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon -r tsconfig-paths/register src/app.ts | ./node_modules/.bin/bunyan",
+    "dev": "nodemon -r tsconfig-paths/register ./app.ts | ./node_modules/.bin/bunyan",
     "lint:check": "eslint 'src/**/*.ts'",
     "lint:fix": "eslint 'src/**/*.ts' --fix",
     "prettier:check": "prettier --check 'src/**/*.{ts,json}'",

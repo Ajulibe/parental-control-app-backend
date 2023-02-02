@@ -1,5 +1,17 @@
-@baseUrl = http://localhost:3000
+# @baseUrl = http://localhost:3000
+@baseUrl = https://m4xk6j9ut8.execute-api.eu-west-3.amazonaws.com/dev
 @urlPath = api/v1
+
+
+
+POST {{baseUrl}}/{{urlPath}}/testing
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+
+}
 
 ###
 POST {{baseUrl}}/{{urlPath}}/register
@@ -13,6 +25,7 @@ withCredentials: true
   "child_name": "jean-claude",
   "device_id": "dw134134341341ded"
 }
+
 
 ###
 POST {{baseUrl}}/{{urlPath}}/login

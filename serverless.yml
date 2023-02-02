@@ -25,6 +25,10 @@ functions:
       CLOUD_API_SECRET: AcXuOE_dzhkVt61C8nPXynivag4
       SENDER_EMAIL: kristian74@ethereal.email
       SENDER_EMAIL_PASSWORD: d1td1CnYYVjyQvbxf8
+      PGHOST: kandula.db.elephantsql.com
+      PGUSER: ampofyrr
+      PGPASSWORD: F7Kz8DWW-qlkgz1ufePOvGwj_5pkX__c
+      PGDATABASE: ampofyrr
 
 package:
   exclude:

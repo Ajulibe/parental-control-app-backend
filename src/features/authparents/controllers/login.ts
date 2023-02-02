@@ -30,4 +30,12 @@ export class Login {
       config.JWT_TOKEN!
     );
   }
+
+  public async testing(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      res.status(HTTP_STATUS.CREATED).json({ data: { working: true, message: 'server is working' } });
+    } catch (error) {
+      res.status(HTTP_STATUS.BAD_REQUEST).json({ message: error });
+    }
+  }
 }
