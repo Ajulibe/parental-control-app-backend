@@ -26,6 +26,7 @@ withCredentials: true
 GET {{baseUrl}}/{{urlPath}}/get-apps/dw134134341341ded
 Content-Type: application/json
 Accept: application/json
+Authorization: {{accessToken}}
 withCredentials: true
 
 
@@ -33,6 +34,7 @@ withCredentials: true
 POST {{baseUrl}}/{{urlPath}}/update-app-status
 Content-Type: application/jsonx
 Accept: application/json
+Authorization: {{accessToken}}
 withCredentials: true
 
 {
