@@ -1,6 +1,6 @@
-import { Login } from '@authparents/controllers/login';
-import { Register } from '@authparents/controllers/register';
-import { SignOut } from '@authparents/controllers/signout';
+import { Login } from '@auth/controllers/login';
+import { Register } from '@auth/controllers/register';
+import { SignOut } from '@auth/controllers/signout';
 import express, { Router } from 'express';
 
 class AuthParentRoutes {

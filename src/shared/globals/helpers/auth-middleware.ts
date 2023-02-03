@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import JWT from 'jsonwebtoken';
 import { config } from '@root/config';
 import { NotAuthorizedError } from '@global/helpers/error-handler';
-import { AuthPayload } from '@authparents/interfaces/auth.interface';
+import { AuthPayload } from '@auth/interfaces/auth.interface';
 import Logger from 'bunyan';
 
 const log: Logger = config.createLogger('authMiddleWare');

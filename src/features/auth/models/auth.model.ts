@@ -28,15 +28,21 @@ export class AuthorisedParent extends Model {
   @UpdatedAt
   updatedAt!: Date;
 
-  // @BeforeCreate
-  // @BeforeUpdate
-  // static async hashPassword(instance: AuthorisedParent) {
-  //   if (instance.changed('password')) {
-  //     instance.password = await hash(instance.password, 10);
-  //   }
-  // }
+  @BeforeCreate
+  @BeforeUpdate
+  static async hashPassword(instance: AuthorisedParent) {
+    if (instance.changed('password')) {
+      instance.password = await hash(instance.password, SALT_ROUND);
+    }
+  }
 
-  // async comparePassword(password: string) {
-  //   return compare(password, this.password);
-  // }
+  async comparePassword(password: string) {
+    return compare(password, this.password);
+  }
+
+  toJSON() {
+    const values = { ...this.get() };
+    delete values.password;
+    return values;
+  }
 }

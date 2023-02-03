@@ -1,4 +1,4 @@
-import { authParentRoutes } from '@authparents/routes/authRoutes';
+import { authParentRoutes } from '@auth/routes/authRoutes';
 import { authMiddleware } from '@global/helpers/auth-middleware';
 import { Application } from 'express';
 import { locationRoutes } from '@location/routes/locationRoutes';

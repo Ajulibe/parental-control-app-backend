@@ -1,10 +1,10 @@
 import JWT from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
 import { joiValidation } from '@global/decorators/joi-validation.decorators';
-import { loginSchema } from '@authparents/schema/login.schema';
+import { loginSchema } from '@auth/schema/login.schema';
 import HTTP_STATUS from 'http-status-codes';
 import { config } from '@root/config';
-import { IAuthParentPayload } from '@authparents/interfaces/auth.interface';
+import { IAuthParentPayload } from '@auth/interfaces/auth.interface';
 import { authParentService } from '@service/db/authparent.service';
 
 export class Login {

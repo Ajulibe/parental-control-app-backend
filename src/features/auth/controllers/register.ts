@@ -1,15 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
 import { joiValidation } from '@global/decorators/joi-validation.decorators';
-import { registerSchema } from '@authparents/schema/register.schema';
-import { AuthorisedParent } from '@authparents/models/auth.model';
+import { registerSchema } from '@auth/schema/register.schema';
+import { AuthorisedParent } from '@auth/models/auth.model';
 import HTTP_STATUS from 'http-status-codes';
 import { config } from '@root/config';
 import JWT from 'jsonwebtoken';
 import { Children } from '@root/features/children/model/children.model';
-import { IAuthParentPayload } from '@authparents/interfaces/auth.interface';
+import { IAuthParentPayload } from '@auth/interfaces/auth.interface';
 import { Transaction } from 'sequelize';
 import { connection } from '@root/setupDatabase';
-import { Cognito } from '@service/auth/cognito.service';
 
 export class Register {
   @joiValidation(registerSchema)

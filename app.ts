@@ -3,7 +3,6 @@ import { ChattyServer } from '@root/setupServer';
 import databaseConnection from '@root/setupDatabase';
 import { config } from '@root/config';
 import Logger from 'bunyan';
-import envVarsSchema from '@root/config.validation';
 
 const log: Logger = config.createLogger('app');
 
