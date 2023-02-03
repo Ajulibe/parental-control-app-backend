@@ -17,7 +17,7 @@ import { SocketIOPostHandler } from '@socket/events';
 const SERVER_PORT = 3000;
 const log: Logger = config.createLogger('server');
 
-export class ChattyServer {
+export class MainServer {
   private app: Application;
 
   constructor(app: Application) {

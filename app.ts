@@ -1,5 +1,5 @@
 import express, { Express } from 'express';
-import { ChattyServer } from '@root/setupServer';
+import { MainServer } from '@root/setupServer';
 import databaseConnection from '@root/setupDatabase';
 import { config } from '@root/config';
 import Logger from 'bunyan';
@@ -11,7 +11,7 @@ class Application {
     this.loadConfig();
     databaseConnection();
     const app: Express = express();
-    const server: ChattyServer = new ChattyServer(app);
+    const server: MainServer = new MainServer(app);
     server.start();
     Application.handleExit();
   }

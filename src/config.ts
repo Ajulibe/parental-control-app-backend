@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 import bunyan from 'bunyan';
 import cloudinary from 'cloudinary';
-import { ObjectSchema } from 'joi';
 
 dotenv.config({});
 
@@ -25,24 +24,16 @@ class Config {
   public AWS_COGNITO_SECRET_HASH: string;
   public AWS_COGNITO_APP_CLIENT_ID: string;
 
-  private readonly DEFAULT_DATABASE_URL = 'mongodb://localhost:27017/chattyapp-backend';
-
   constructor() {
-    this.DATABASE_URL = process.env.DATABASE_URL || this.DEFAULT_DATABASE_URL;
+    this.DATABASE_URL = process.env.DATABASE_URL || '';
     this.JWT_TOKEN = process.env.JWT_TOKEN || '1234';
     this.NODE_ENV = process.env.NODE_ENV || '';
     this.SECRET_KEY_ONE = process.env.SECRET_KEY_ONE || '';
     this.SECRET_KEY_TWO = process.env.SECRET_KEY_TWO || '';
     this.CLIENT_URL = process.env.CLIENT_URL || '3001';
-    this.REDIS_HOST = process.env.REDIS_HOST || '';
     this.CLOUD_NAME = process.env.CLOUD_NAME || '';
     this.CLOUD_API_KEY = process.env.CLOUD_API_KEY || '';
     this.CLOUD_API_SECRET = process.env.CLOUD_API_SECRET || '';
-    this.SENDER_EMAIL = process.env.SENDER_EMAIL || '';
-    this.SENDER_EMAIL_PASSWORD = process.env.SENDER_EMAIL_PASSWORD || '';
-    this.SENDGRID_API_KEY = process.env.SENDGRID_API_KEY || '';
-    this.SENDGRID_SENDER = process.env.SENDGRID_SENDER || '';
-    this.EC2_URL = process.env.EC2_URL || '';
     this.TOKEN_EXPIRY = process.env.TOKEN_EXPIRY || '';
     this.AWS_COGNITO_SECRET_HASH = process.env.AWS_COGNITO_SECRET_HASH || '';
     this.AWS_COGNITO_APP_CLIENT_ID = process.env.AWS_COGNITO_APP_CLIENT_ID || '';
@@ -53,12 +44,6 @@ class Config {
   }
 
   public validateConfig(): void {
-    //validation with JOI
-    // const { error } = envVarsSchema.prefs({ errors: { label: 'key' } }).validate(process.env);
-    // if (error) {
-    //   throw new Error(`Config validation error: ${error.message}`);
-    // }
-
     // manual validation
     for (const [key, value] of Object.entries(this)) {
       if (value === undefined) {
