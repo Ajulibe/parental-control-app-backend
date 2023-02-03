@@ -20,11 +20,6 @@ functions:
       SECRET_KEY_TWO: thisisasecretkeyone
       CLIENT_URL: http://localhost:3000
       TOKEN_EXPIRY: 1500
-      CLOUD_NAME: ajulibe
-      CLOUD_API_KEY: 731597918821489
-      CLOUD_API_SECRET: AcXuOE_dzhkVt61C8nPXynivag4
-      SENDER_EMAIL: kristian74@ethereal.email
-      SENDER_EMAIL_PASSWORD: d1td1CnYYVjyQvbxf8
       PGHOST: kandula.db.elephantsql.com
       PGUSER: ampofyrr
       PGPASSWORD: F7Kz8DWW-qlkgz1ufePOvGwj_5pkX__c

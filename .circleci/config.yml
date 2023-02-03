@@ -1,0 +1,56 @@
+version: 2.1
+
+jobs:
+  build:
+    working_directory: ~/project
+
+    docker:
+      - image: node:12
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install dependencies
+          command: npm install
+
+      - run:
+          name: Set environment variables
+          command: |
+            echo "NODE_ENV=test" >> $BASH_ENV
+            echo "DB_HOST=your-database-host" >> $BASH_ENV
+            echo "DB_NAME=your-database-name" >> $BASH_ENV
+            echo "DB_USER=your-database-user" >> $BASH_ENV
+            echo "DB_PASSWORD=your-database-password" >> $BASH_ENV
+
+      - run:
+          name: Run migrations
+          command: npm run migrations
+
+      - run:
+          name: Start the server
+          command: pm2 start app.js --no-daemon
+
+      - run:
+          name: Run tests
+          command: npm test
+
+      - run:
+          name: Stop the server
+          command: pm2 stop app.js
+
+      - store_artifacts:
+          path: ~/project/build
+
+      - store_test_results:
+          path: ~/project/test-results
+
+workflows:
+  version: 2.1
+
+  build_and_test:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: main

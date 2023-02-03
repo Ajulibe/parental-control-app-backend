@@ -26,7 +26,7 @@ export class Cognito {
 
     try {
       const returned_signup_data = await this.cognitoIdentity.signUp(signUpParams).promise();
-      console.log(returned_signup_data, 'returned_signup_data');
+      log.info(returned_signup_data, 'returned_signup_data');
     } catch (error: unknown) {
       throw new Error(`Failed to sign up: ${error}`);
     }
@@ -54,7 +54,7 @@ export class Cognito {
   }
 
   public async confirmSignUp(username: string, code: string): Promise<boolean> {
-    var params = {
+    const params = {
       ClientId: this.clientId,
       ConfirmationCode: code,
       Username: username,
@@ -63,10 +63,10 @@ export class Cognito {
 
     try {
       const cognitoResp = await this.cognitoIdentity.confirmSignUp(params).promise();
-      console.log(cognitoResp);
+      log.info(cognitoResp);
       return true;
     } catch (error) {
-      console.log('error', error);
+      log.info('error', error);
       return false;
     }
   }
@@ -79,7 +79,7 @@ export class Cognito {
   }
 
   public async forgotPassword(username: string): Promise<boolean> {
-    var params = {
+    const params = {
       ClientId: this.clientId,
       Username: username,
       SecretHash: this.hashSecret(username)
@@ -87,16 +87,15 @@ export class Cognito {
 
     try {
       const data = await this.cognitoIdentity.forgotPassword(params).promise();
-      console.log(data);
       return true;
     } catch (error) {
-      console.log(error);
+      log.info(error);
       return false;
     }
   }
 
   public async confirmNewPassword(username: string, password: string, code: string): Promise<boolean> {
-    var params = {
+    const params = {
       ClientId: this.clientId /* required */,
       ConfirmationCode: code /* required */,
       Password: password /* required */,
@@ -106,10 +105,10 @@ export class Cognito {
 
     try {
       const data = await this.cognitoIdentity.confirmForgotPassword(params).promise();
-      console.log(data);
+      log.info(data);
       return true;
     } catch (error) {
-      console.log(error);
+      log.info(error);
       return false;
     }
   }
