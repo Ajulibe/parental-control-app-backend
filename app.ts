@@ -7,20 +7,11 @@ import Logger from 'bunyan';
 const log: Logger = config.createLogger('app');
 
 class Application {
-  public initialize(): void {
-    this.loadConfig();
-    databaseConnection();
-    const app: Express = express();
-    const server: MainServer = new MainServer(app);
-    server.start();
-    Application.handleExit();
-  }
-
-  private loadConfig(): void {
+  public loadConfig(): void {
     config.validateConfig();
   }
 
-  private static handleExit(): void {
+  public handleExit(): void {
     process.on('uncaughtException', (error: Error) => {
       log.error(`There was an uncaught error: ${error}`);
       Application.shutDownProperly(1);
@@ -59,5 +50,17 @@ class Application {
   }
 }
 
-export const application: Application = new Application();
-application.initialize();
+/*=============================================
+=           initialize():              =
+=============================================*/
+const app: Express = express();
+const application: Application = new Application();
+application.loadConfig();
+databaseConnection();
+application.handleExit();
+
+const server: MainServer = new MainServer(app);
+server.start();
+
+// for aws lamda function
+export { app };

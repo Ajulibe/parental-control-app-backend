@@ -19,8 +19,8 @@ export class Update {
       );
       const updated_app_data = await Apps.findOne({ where: { device_id, installed_app_name } });
       res.status(HTTP_STATUS.OK).json({ message: 'Sucessfully Updated', data: updated_app_data });
-      //send data to the android app
-      socketIOPostObject.emit('get_live_locations', updated_app_data);
+      //send data to the android app //commented out cause of lambda
+      // socketIOPostObject.emit('get_live_locations', updated_app_data);
     } catch (error) {
       next(error);
     }

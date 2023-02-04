@@ -108,7 +108,7 @@ export class MainServer {
         log.info(socket, 'a user connected');
       });
       this.startHttpServer(httpServer);
-      this.socketIOConnections(socketIO);
+      // this.socketIOConnections(socketIO);
     } catch (error) {
       log.error(error);
     }
@@ -116,9 +116,9 @@ export class MainServer {
 
   private async startHttpServer(httpServer: http.Server): Promise<void> {
     log.info(`Server has started with process ${process.pid}`);
-    httpServer.listen(SERVER_PORT, () => {
-      log.info(`Server running on port ${SERVER_PORT}`);
-    });
+    // httpServer.listen(SERVER_PORT, () => {
+    //   log.info(`Server running on port ${SERVER_PORT}`);
+    // });
   }
 
   /*=============================================

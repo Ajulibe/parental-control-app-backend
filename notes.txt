@@ -11,3 +11,6 @@ to start the mongo community use - brew services start mongodb-community@6.0
 to check if the service is running - brew services list
 to start mongo db use the command: mongosh
 
+
+todo:
+configure CI/CD for this

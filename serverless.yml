@@ -8,8 +8,8 @@ provider:
   stage: dev
 
 functions:
-  hello:
-    handler: handler.hello
+  api:
+    handler: handler.api
     events:
       - http: ANY /{proxy+}
       - http: ANY /
@@ -25,10 +25,22 @@ functions:
       PGPASSWORD: F7Kz8DWW-qlkgz1ufePOvGwj_5pkX__c
       PGDATABASE: ampofyrr
 
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+  - serverless-tscpaths
+
+custom:
+  serverlessPluginTypescript:
+    tsConfigFileLocation: './tsconfigBuild.json'
+
 package:
   exclude:
-    - node_modules/**
+    - node_modules/aws-sdk
     - endpoints/**
     - migrations/**
     - models/**
     - seeders/**
+    - .build/**
+    - .idea
+    - .vscode
