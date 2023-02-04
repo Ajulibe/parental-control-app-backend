@@ -3,13 +3,10 @@ import serverless from 'serverless-http';
 import { APIGatewayProxyEvent, APIGatewayProxyResult, Context } from 'aws-lambda';
 
 const serverlessApp = serverless(app);
-module.exports.api = async (event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> => {
+module.exports.api = async (event: APIGatewayProxyEvent, context: Context): Promise<any> => {
   try {
-    await serverlessApp(event, context);
-    return {
-      statusCode: 200,
-      body: 'Success! server is running'
-    };
+    const response = await serverlessApp(event, context);
+    return response;
   } catch (error) {
     return {
       statusCode: 500,

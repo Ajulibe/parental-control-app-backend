@@ -1,3 +1,7 @@
+// for local testing
+// @baseUrl = http://localhost:3000
+
+// for serverless offline testing
 @baseUrl = http://localhost:3000/dev
 @urlPath = api/v1
 

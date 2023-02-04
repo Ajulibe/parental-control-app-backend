@@ -1,4 +1,8 @@
-@baseUrl = http://localhost:3000
+// for local testing
+// @baseUrl = http://localhost:3000
+
+// for serverless offline testing
+@baseUrl = http://localhost:3000/dev
 @urlPath = api/v1
 
 @accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbF9hZGRyZXNzIjoiYmVuaml0ZXN0aW5nT25lQHlhaG9vLmNvbSIsImNoaWxkX25hbWUiOiJqZWFuLWNsYXVkZSIsInBhc3N3b3JkIjoicjNmY3JmcmYiLCJpYXQiOjE2NzUzNzEzODZ9.vEgh9cbNQBLHjxHKq4Bm6PjvUNhoHC60Gu8HsL1f24E

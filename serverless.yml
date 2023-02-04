@@ -32,7 +32,7 @@ plugins:
 
 custom:
   serverlessPluginTypescript:
-    tsConfigFileLocation: './tsconfigBuild.json'
+    tsConfigFileLocation: './tsconfig.json'
 
 package:
   exclude:
