@@ -1,6 +1,6 @@
 import { app } from './app';
 import serverless from 'serverless-http';
-import { APIGatewayProxyEvent, APIGatewayProxyResult, Context } from 'aws-lambda';
+import { APIGatewayProxyEvent, Context } from 'aws-lambda';
 
 const serverlessApp = serverless(app);
 module.exports.api = async (event: APIGatewayProxyEvent, context: Context): Promise<any> => {

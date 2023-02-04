@@ -35,12 +35,13 @@ custom:
     tsConfigFileLocation: './tsconfig.json'
 
 package:
-  exclude:
-    - node_modules/aws-sdk
-    - endpoints/**
-    - migrations/**
-    - models/**
-    - seeders/**
-    - .build/**
-    - .idea
-    - .vscode
+  patterns:
+    - '!node_modules/aws-sdk'
+    - '!endpoints/**'
+    - '!migrations/**'
+    - '!models/**'
+    - '!seeders/**'
+    - '!.build/**'
+    - '!.idea'
+    - '!.vscode'
+    - '!node_modules/aws-lambda'

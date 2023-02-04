@@ -1,6 +1,9 @@
 // for local testing
 // @baseUrl = http://localhost:3000
 
+// PRODUCTION ON LAMBDA
+// @baseUrl = https://7dw32zvl44.execute-api.eu-west-3.amazonaws.com/dev/
+
 // for serverless offline testing
 @baseUrl = http://localhost:3000/dev
 @urlPath = api/v1
