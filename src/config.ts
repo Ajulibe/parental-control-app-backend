@@ -1,6 +1,5 @@
-import dotenv from 'dotenv';
 import bunyan from 'bunyan';
-import cloudinary from 'cloudinary';
+import dotenv from 'dotenv';
 
 dotenv.config({});
 
@@ -20,6 +19,11 @@ class Config {
   public EC2_URL: string | undefined;
   public AWS_COGNITO_SECRET_HASH: string;
   public AWS_COGNITO_APP_CLIENT_ID: string;
+  public SESSION_KEY: string;
+  public OKTA_CLIENT_ID: string;
+  public OKTA_REDIRECT_URI: string;
+  public OKTA_ISSUER: string;
+  public SERVER_URL: string;
 
   constructor() {
     this.DATABASE_URL = process.env.DATABASE_URL || '';
@@ -28,9 +32,14 @@ class Config {
     this.SECRET_KEY_ONE = process.env.SECRET_KEY_ONE || '';
     this.SECRET_KEY_TWO = process.env.SECRET_KEY_TWO || '';
     this.CLIENT_URL = process.env.CLIENT_URL || '3001';
+    this.SERVER_URL = process.env.SERVER_URL || '4000';
     this.TOKEN_EXPIRY = process.env.TOKEN_EXPIRY || '';
     this.AWS_COGNITO_SECRET_HASH = process.env.AWS_COGNITO_SECRET_HASH || '';
     this.AWS_COGNITO_APP_CLIENT_ID = process.env.AWS_COGNITO_APP_CLIENT_ID || '';
+    this.SESSION_KEY = process.env.SESSION_KEY || '';
+    this.OKTA_CLIENT_ID = process.env.OKTA_CLIENT_ID || '';
+    this.OKTA_REDIRECT_URI = process.env.OKTA_REDIRECT_URI || '';
+    this.OKTA_ISSUER = process.env.OKTA_ISSUER || '';
   }
 
   public createLogger(name: string): bunyan {

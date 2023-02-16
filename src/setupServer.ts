@@ -1,20 +1,23 @@
-import { Application, json, urlencoded, Response, Request, NextFunction } from 'express';
-import http from 'http';
+import { Application, NextFunction, Request, Response, json, urlencoded } from 'express';
+import { CustomError, IErrorResponse } from '@global/helpers/error-handler';
+
+import HTTP_STATUS from 'http-status-codes';
+import Logger from 'bunyan';
+import { Server } from 'socket.io';
+import { SocketIOPostHandler } from '@socket/events';
+import applicationRoutes from '@root/routes';
+import compression from 'compression';
+import { config } from '@root/config';
+import cookieSession from 'cookie-session';
 import cors from 'cors';
 import helmet from 'helmet';
 import hpp from 'hpp';
-import compression from 'compression';
-import cookieSession from 'cookie-session';
-import HTTP_STATUS from 'http-status-codes';
-import { config } from '@root/config';
-import Logger from 'bunyan';
-import { Server } from 'socket.io';
-import applicationRoutes from '@root/routes';
-import { CustomError, IErrorResponse } from '@global/helpers/error-handler';
+import http from 'http';
 import morgan from '@global/helpers/morgan';
-import { SocketIOPostHandler } from '@socket/events';
+import { oidc } from '@global/helpers/okta-middleware';
+import session from 'express-session';
 
-const SERVER_PORT = 3000;
+const SERVER_PORT = 4000;
 const log: Logger = config.createLogger('server');
 
 export class MainServer {
@@ -28,12 +31,13 @@ export class MainServer {
     this.securityMiddleware(this.app);
     this.standardMiddleware(this.app);
     this.routesMiddleware(this.app);
-    this.apiMonitoring(this.app);
+    // this.apiMonitoring(this.app);
     this.startServer(this.app);
     this.globalErrorHandler(this.app);
   }
 
   private securityMiddleware(app: Application): void {
+    //the the inital application
     app.use(
       cookieSession({
         name: 'session',
@@ -43,6 +47,15 @@ export class MainServer {
         sameSite: 'none' // comment this line when running the server locally
       })
     );
+    //Used by Okta OIDC
+    app.use(
+      session({
+        secret: config.SESSION_KEY!,
+        resave: true,
+        saveUninitialized: false
+      })
+    );
+    app.use(oidc.router);
     app.use(hpp());
     app.use(helmet());
     app.use(
@@ -71,7 +84,7 @@ export class MainServer {
     applicationRoutes(app);
   }
 
-  private apiMonitoring(app: Application): void {}
+  // private apiMonitoring(app: Application): void {}
 
   /*=============================================
   =         Global Error middleware            =
@@ -116,9 +129,9 @@ export class MainServer {
 
   private async startHttpServer(httpServer: http.Server): Promise<void> {
     log.info(`Server has started with process ${process.pid}`);
-    // httpServer.listen(SERVER_PORT, () => {
-    //   log.info(`Server running on port ${SERVER_PORT}`);
-    // });
+    httpServer.listen(SERVER_PORT, () => {
+      log.info(`Server running on port ${SERVER_PORT}`);
+    });
   }
 
   /*=============================================
