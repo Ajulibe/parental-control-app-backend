@@ -1,8 +1,10 @@
 import express, { Express } from 'express';
-import { MainServer } from '@root/setupServer';
-import databaseConnection from '@root/setupDatabase';
-import { config } from '@root/config';
+
 import Logger from 'bunyan';
+import { MainServer } from '@root/setupServer';
+import { config } from '@root/config';
+import databaseConnection from '@root/setupDatabase';
+import mongooseDatabaseConnection from '@root/setupMongoose';
 
 const log: Logger = config.createLogger('app');
 
@@ -56,6 +58,7 @@ class Application {
 const app: Express = express();
 const application: Application = new Application();
 application.loadConfig();
+mongooseDatabaseConnection();
 databaseConnection();
 application.handleExit();
 

@@ -1,30 +1,24 @@
-import { Column, DataType, Model, PrimaryKey, Table } from 'sequelize-typescript';
+import mongoose, { Document, Schema } from 'mongoose';
 
-@Table({ tableName: 'movie_ratings' })
-export class MovieRating extends Model {
-  @PrimaryKey
-  @Column({
-    type: DataType.INTEGER.UNSIGNED,
-    autoIncrement: true,
-    allowNull: false
-  })
-  id!: number;
-
-  @Column({
-    type: DataType.INTEGER.UNSIGNED,
-    allowNull: false
-  })
-  user_id!: number;
-
-  @Column({
-    type: DataType.INTEGER.UNSIGNED,
-    allowNull: false
-  })
-  movie_id!: number;
-
-  @Column({
-    type: DataType.TINYINT.UNSIGNED,
-    allowNull: false
-  })
-  rating!: number;
+export interface IMovieRating extends Document {
+  user_id: number;
+  movie_id: number;
+  rating: number;
 }
+
+const MovieRatingSchema: Schema = new Schema({
+  user_id: {
+    type: Number,
+    required: true
+  },
+  movie_id: {
+    type: Number,
+    required: true
+  },
+  rating: {
+    type: Number,
+    required: true
+  }
+});
+
+export const MovieRating = mongoose.model<IMovieRating>('MovieRating', MovieRatingSchema, 'movie_ratings');
