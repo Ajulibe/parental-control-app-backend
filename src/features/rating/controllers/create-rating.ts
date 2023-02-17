@@ -11,20 +11,16 @@ export class Create {
   @joiValidation(ratingSchema)
   public async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { user_id, movie_id, rating } = req.body;
-    try {
-      const existingRating = await MovieRating.findOne({ user_id, movie_id });
-      if (!existingRating) {
-        // Make a POST request to the Java rating controller's API endpoint to create the rating
-        await axios.post(config.JAVA_SERVER_BASER_URL, {
-          movie_id,
-          rating
-        });
 
-        // If the request is successful
-        res.status(HTTP_STATUS.CREATED).json({ message: 'Rated Succesfully!' });
-      } else {
-        res.status(HTTP_STATUS.OK).json({ message: 'Rating already exists' });
-      }
+    try {
+      // Make a POST request to the Java rating controller's API endpoint to create the rating
+      await axios.post(`${config.JAVA_SERVER_BASER_URL}/rate-movie`, {
+        id: movie_id,
+        rating: rating
+      });
+      // If the request is successful
+      MovieRating.create({ user_id, movie_id, rating });
+      res.status(HTTP_STATUS.CREATED).json({ message: 'Rated Succesfully!' });
     } catch (error) {
       next(error);
     }
