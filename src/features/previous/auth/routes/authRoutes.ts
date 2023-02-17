@@ -1,7 +1,8 @@
-import { Login } from '@auth/controllers/login';
-import { Register } from '@auth/controllers/register';
-import { SignOut } from '@auth/controllers/signout';
 import express, { Router } from 'express';
+
+import { Login } from '@root/features/previous/auth/controllers/login';
+import { Register } from '@root/features/previous/auth/controllers/register';
+import { SignOut } from '@root/features/previous/auth/controllers/signout';
 
 class AuthParentRoutes {
   private router: Router;

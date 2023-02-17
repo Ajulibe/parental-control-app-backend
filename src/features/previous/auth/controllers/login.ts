@@ -1,20 +1,21 @@
-import JWT from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
-import { joiValidation } from '@global/decorators/joi-validation.decorators';
-import { loginSchema } from '@auth/schema/login.schema';
+
 import HTTP_STATUS from 'http-status-codes';
-import { config } from '@root/config';
-import { IAuthParentPayload } from '@auth/interfaces/auth.interface';
+import { IAuthParentPayload } from '@root/features/previous/auth/interfaces/auth.interface';
+import JWT from 'jsonwebtoken';
 import { authParentService } from '@service/db/authparent.service';
+import { config } from '@root/config';
+import { joiValidation } from '@global/decorators/joi-validation.decorators';
+import { loginSchema } from '@root/features/previous/auth/schema/login.schema';
 
 export class Login {
   @joiValidation(loginSchema)
   public async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { parent, child } = await authParentService.loginAuthParent(req.body, next);
-      const userJwt: string = Login.prototype.signToken({ ...req.body });
-      req.session = { jwt: userJwt };
-      res.status(HTTP_STATUS.OK).json({ message: 'Successfully Logged in', data: [{ parent, child }], token: userJwt });
+      // const userJwt: string = Login.prototype.signToken({ ...req.body });
+      // req.session = { jwt: "userJwt" };
+      // res.status(HTTP_STATUS.OK).json({ message: 'Successfully Logged in', data: [{ parent, child }], token: userJwt });
     } catch (error) {
       next(error);
     }
@@ -31,7 +32,7 @@ export class Login {
     );
   }
 
-  public async testing(req: Request, res: Response, next: NextFunction): Promise<void> {
+  public async testing(req: Request, res: Response): Promise<void> {
     try {
       res.status(HTTP_STATUS.CREATED).json({ data: { working: true, message: 'server is working' } });
     } catch (error) {

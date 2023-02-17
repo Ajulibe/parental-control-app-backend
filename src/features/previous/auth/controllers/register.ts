@@ -1,14 +1,15 @@
 import { NextFunction, Request, Response } from 'express';
-import { joiValidation } from '@global/decorators/joi-validation.decorators';
-import { registerSchema } from '@auth/schema/register.schema';
-import { AuthorisedParent } from '@auth/models/auth.model';
+
+import { AuthorisedParent } from '@root/features/previous/auth/models/auth.model';
+import { Children } from '@root/features/previous/children/model/children.model';
 import HTTP_STATUS from 'http-status-codes';
-import { config } from '@root/config';
+import { IAuthParentPayload } from '@root/features/previous/auth/interfaces/auth.interface';
 import JWT from 'jsonwebtoken';
-import { Children } from '@root/features/children/model/children.model';
-import { IAuthParentPayload } from '@auth/interfaces/auth.interface';
 import { Transaction } from 'sequelize';
+import { config } from '@root/config';
 import { connection } from '@root/setupDatabase';
+import { joiValidation } from '@global/decorators/joi-validation.decorators';
+import { registerSchema } from '@root/features/previous/auth/schema/register.schema';
 
 export class Register {
   @joiValidation(registerSchema)

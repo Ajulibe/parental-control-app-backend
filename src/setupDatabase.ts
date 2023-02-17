@@ -1,10 +1,10 @@
+import { Apps as AppsModel } from '@root/features/previous/apps/model/apps.model';
+import { AuthorisedParent } from '@root/features/previous/auth/models/auth.model';
+import { Children as ChildrenModel } from '@root/features/previous/children/model/children.model';
+import { Location as LocationModel } from '@root/features/previous/location/model/location.model';
 import Logger from 'bunyan';
-import { config } from '@root/config';
 import { Sequelize } from 'sequelize-typescript';
-import { AuthorisedParent } from '@auth/models/auth.model';
-import { Apps as AppsModel } from '@apps/model/apps.model';
-import { Location as LocationModel } from '@root/features/location/model/location.model';
-import { Children as ChildrenModel } from '@children/model/children.model';
+import { config } from '@root/config';
 
 const log: Logger = config.createLogger('setupDatabase');
 
@@ -34,7 +34,7 @@ export default () => {
   const connect = async () => {
     try {
       await connection.sync();
-      log.info('Connection has been established successfully.');
+      log.info('Connection to POSTGRESQL has been established successfully.');
     } catch (error) {
       log.error('Unable to connect to the database:', error);
     }

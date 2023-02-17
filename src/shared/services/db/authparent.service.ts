@@ -1,8 +1,8 @@
-import { AuthorisedParent } from '@auth/models/auth.model';
-import { IAuthParentPayload } from '@auth/interfaces/auth.interface';
-import { Children } from '@root/features/children/model/children.model';
-import { NextFunction } from 'express';
+import { AuthorisedParent } from '@root/features/previous/auth/models/auth.model';
+import { Children } from '@root/features/previous/children/model/children.model';
+import { IAuthParentPayload } from '@root/features/previous/auth/interfaces/auth.interface';
 import Logger from 'bunyan';
+import { NextFunction } from 'express';
 import { config } from '@root/config';
 
 const log: Logger = config.createLogger('authParentService');

@@ -1,8 +1,9 @@
-import { authMiddleware } from '@global/helpers/auth-middleware';
-import { Create } from '@location/controllers/create-location';
-import { Get } from '@location/controllers/get-location';
-import { Update } from '@location/controllers/update-location';
 import express, { Router } from 'express';
+
+import { Create } from '@root/features/previous/location/controllers/create-location';
+import { Get } from '@root/features/previous/location/controllers/get-location';
+import { Update } from '@root/features/previous/location/controllers/update-location';
+import { authMiddleware } from '@global/helpers/auth-middleware';
 
 class LocationRoutes {
   private router: Router;

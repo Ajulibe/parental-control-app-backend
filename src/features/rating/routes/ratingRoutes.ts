@@ -3,7 +3,7 @@ import express, { Router } from 'express';
 import { Create } from '@rating/controllers/create-rating';
 import { Get } from '@rating/controllers/get-rating';
 import { Update } from '@rating/controllers/update-rating';
-import { oktaMiddleware } from '@global/helpers/okta-middleware';
+import { authMiddleware } from '@global/helpers/auth-middleware';
 
 class RatingRoutes {
   private router: Router;
@@ -13,11 +13,11 @@ class RatingRoutes {
   }
 
   public routes(): Router {
-    this.router.post('/create-rating', oktaMiddleware, Create.prototype.create);
-    this.router.get('/get-rating', oktaMiddleware, Get.prototype.read);
-    this.router.post('/update-rating', oktaMiddleware, Update.prototype.update);
+    this.router.post('/create-rating', authMiddleware.verifyOktaUser, Create.prototype.create);
+    this.router.get('/get-rating/:movie_id', authMiddleware.verifyOktaUser, Get.prototype.read);
+    this.router.post('/update-rating', authMiddleware.verifyOktaUser, Update.prototype.update);
     return this.router;
   }
 }
 
-export const locationRoutes: RatingRoutes = new RatingRoutes();
+export const ratingRoutes: RatingRoutes = new RatingRoutes();

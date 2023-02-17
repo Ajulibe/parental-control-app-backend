@@ -1,0 +1,50 @@
+// for local testing
+// @baseUrl = http://localhost:3000
+
+// PRODUCTION ON LAMBDA
+// @baseUrl = https://7dw32zvl44.execute-api.eu-west-3.amazonaws.com/dev/
+
+// for serverless offline testing
+@baseUrl = http://localhost:4000
+@urlPath = api/v1
+
+@accessToken = Bearer eyJraWQiOiJZNEJMWVFlZHRISTdlb3poc3RfSVoxZzVHelQ0V1Q3WjdTSUN3cHFVRVBNIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULnVSWG9HeEdFUWJGZVpzbS04VHNXSmN4a1JtaVVsenRnQk9aLXhNa3BqanciLCJpc3MiOiJodHRwczovL2Rldi0yMTQ1OTM0Mi5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6ImFwaTovL2RlZmF1bHQiLCJpYXQiOjE2NzY1ODI0ODQsImV4cCI6MTY3NjU4NjA4NCwiY2lkIjoiMG9hOGNhNXF6aXNyMVR0Wjc1ZDciLCJ1aWQiOiIwMHU4Y2E1cDdtMnZicHJnODVkNyIsInNjcCI6WyJwcm9maWxlIiwib3BlbmlkIiwiZW1haWwiXSwiYXV0aF90aW1lIjoxNjc2NTgyNDgyLCJzdWIiOiJ0ZXN0dXNlckBlbWFpbC5jb20ifQ.mXBHT6TF7zcV6UOVdgqScLqxRwqPYhZi7JhNljgBl5AiQfymczNiSh2my3CzUXtC_cGlsK2nT3XV-7T8BP0VoxK19OggJ6I9bNO5D8idcyvrzWuff0qc0t3EFwLeQWtXFO-k4wrOFHRY3SJb8IOlz3deG6qKjM4gcbjfH_Qd3k-l2eXszBvn9cpKpda3lOXmRfPODvPZ_gXH5rTp6gwqMa17xwEC0X0v5gteqYOfx1kI2Z4pZQFjZfQs8fNqAEBFiYCzI75scnPhQGwV-1Tr9GpDMPbRGxEsqv2EytzCZ_dZPg274JQHYiChAIeALYJvg_FSJMYqcR1pC6EU9NSILA
+POST {{baseUrl}}/{{urlPath}}/update-rating
+Content-Type: application/json
+Accept: application/json
+Authorization: {{accessToken}}
+withCredentials: true
+
+{
+"user_id": 5,
+"movie_id": 2,
+"rating": 5
+}
+
+###
+GET {{baseUrl}}/{{urlPath}}/get-rating/2
+Content-Type: application/json
+Accept: application/json
+Authorization: {{accessToken}}
+withCredentials: true
+
+
+###
+POST {{baseUrl}}/{{urlPath}}/create-rating
+Content-Type: application/json
+Accept: application/json
+Authorization: {{accessToken}}
+withCredentials: true
+
+{
+"user_id": 10,
+"movie_id": 2,
+"rating": 4
+}
+
+
+
+
+
+
+

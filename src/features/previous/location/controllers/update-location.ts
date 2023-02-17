@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
-import { joiValidation } from '@global/decorators/joi-validation.decorators';
+
 import HTTP_STATUS from 'http-status-codes';
-import { Location } from '@root/features/location/model/location.model';
+import { Location } from '@root/features/previous/location/model/location.model';
+import { joiValidation } from '@global/decorators/joi-validation.decorators';
 import { locationSchema } from '../schema/location.schema';
 
 export class Update {

@@ -24,6 +24,8 @@ class Config {
   public OKTA_REDIRECT_URI: string;
   public OKTA_ISSUER: string;
   public SERVER_URL: string;
+  public OKTA_CLIENT_SECRET: string;
+  public JAVA_SERVER_BASER_URL: string;
 
   constructor() {
     this.DATABASE_URL = process.env.DATABASE_URL || '';
@@ -40,6 +42,8 @@ class Config {
     this.OKTA_CLIENT_ID = process.env.OKTA_CLIENT_ID || '';
     this.OKTA_REDIRECT_URI = process.env.OKTA_REDIRECT_URI || '';
     this.OKTA_ISSUER = process.env.OKTA_ISSUER || '';
+    this.OKTA_CLIENT_SECRET = process.env.OKTA_CLIENT_SECRET || '';
+    this.JAVA_SERVER_BASER_URL = process.env.JAVA_SERVER_BASER_URL || '';
   }
 
   public createLogger(name: string): bunyan {

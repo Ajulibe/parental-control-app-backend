@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
-import { joiValidation } from '@global/decorators/joi-validation.decorators';
+
+import { Apps } from '@root/features/previous/apps/model/apps.model';
 import HTTP_STATUS from 'http-status-codes';
-import { appSchema } from '@apps/schema/app.schema';
-import { Apps } from '@apps/model/apps.model';
+import { appSchema } from '@root/features/previous/apps/schema/app.schema';
+import { joiValidation } from '@global/decorators/joi-validation.decorators';
 import { socketIOPostObject } from '@socket/events';
 
 export class Update {

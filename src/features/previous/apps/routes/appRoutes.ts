@@ -1,8 +1,9 @@
-import { Create } from '@apps/controllers/create-app';
-import { Get } from '@apps/controllers/get-app';
-import { Update } from '@apps/controllers/update-apps';
-import { authMiddleware } from '@global/helpers/auth-middleware';
 import express, { Router } from 'express';
+
+import { Create } from '@root/features/previous/apps/controllers/create-app';
+import { Get } from '@root/features/previous/apps/controllers/get-app';
+import { Update } from '@root/features/previous/apps/controllers/update-apps';
+import { authMiddleware } from '@global/helpers/auth-middleware';
 
 class AppRoutes {
   private router: Router;

@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register ./app.ts | ./node_modules/.bin/bunyan",
-    "pm:start": "npm run build && pm2 start ecosystem.config.js -i 2 --attach --watch | ./node_modules/.bin/bunyan",
+    "pm:start": "npm run build && pm2 start ecosystem.config.js -i 10 --attach --watch | ./node_modules/.bin/bunyan",
     "stop": "pm2 stop all",
     "build:watch": "npm run build -- -W",
     "monitor": "pm2 monit",
@@ -26,6 +26,7 @@
   "license": "ISC",
   "dependencies": {
     "@bull-board/express": "^4.3.1",
+    "@okta/jwt-verifier": "^3.0.1",
     "@okta/oidc-middleware": "^5.0.1",
     "@sendgrid/mail": "^7.7.0",
     "@socket.io/redis-adapter": "^7.2.0",
@@ -60,6 +61,7 @@
     "pg": "^8.9.0",
     "pg-hstore": "^2.3.4",
     "redis": "^4.3.1",
+    "reflect-metadata": "^0.1.13",
     "sequelize": "^6.28.0",
     "sequelize-typescript": "^2.1.5",
     "serverless": "^3.27.0",
@@ -86,6 +88,7 @@
     "@types/lodash": "^4.14.185",
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.3",
+    "@types/node": "^18.13.0",
     "@types/nodemailer": "^6.4.6",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.37.0",

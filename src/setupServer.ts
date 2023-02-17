@@ -14,8 +14,6 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import http from 'http';
 import morgan from '@global/helpers/morgan';
-import { oidc } from '@global/helpers/okta-middleware';
-import session from 'express-session';
 
 const SERVER_PORT = 4000;
 const log: Logger = config.createLogger('server');
@@ -37,7 +35,6 @@ export class MainServer {
   }
 
   private securityMiddleware(app: Application): void {
-    //the the inital application
     app.use(
       cookieSession({
         name: 'session',
@@ -47,15 +44,6 @@ export class MainServer {
         sameSite: 'none' // comment this line when running the server locally
       })
     );
-    //Used by Okta OIDC
-    app.use(
-      session({
-        secret: config.SESSION_KEY!,
-        resave: true,
-        saveUninitialized: false
-      })
-    );
-    app.use(oidc.router);
     app.use(hpp());
     app.use(helmet());
     app.use(
@@ -116,10 +104,10 @@ export class MainServer {
   private async startServer(app: Application): Promise<void> {
     try {
       const httpServer: http.Server = new http.Server(app);
-      const socketIO: Server = await this.createSocketIO(httpServer);
-      socketIO.on('connection', (socket) => {
-        log.info(socket, 'a user connected');
-      });
+      // const socketIO: Server = await this.createSocketIO(httpServer);
+      // socketIO.on('connection', (socket) => {
+      //   log.info(socket, 'a user connected');
+      // });
       this.startHttpServer(httpServer);
       // this.socketIOConnections(socketIO);
     } catch (error) {
