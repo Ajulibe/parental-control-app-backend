@@ -1,18 +1,21 @@
-service: parental-control-backend
+service: movie-db-ratings-api-id
 frameworkVersion: '3'
 
 provider:
   name: aws
   runtime: nodejs12.x
   region: eu-west-3
-  stage: dev
+  stage: prod
+  #custom value to enable reusability
+  MovieDbBackendApiGateway: '30hj4pnr9f'
+  MovieRestApiId: 'q02j6bblzd'
+  MovieRestApiResourceName: 'xp-ratings'
 
 functions:
   api:
     handler: handler.api
     events:
       - http: ANY /{proxy+}
-      - http: ANY /
     environment:
       JWT_TOKEN: thisisatokenfromme
       NODE_ENV: development
@@ -24,6 +27,40 @@ functions:
       PGUSER: ampofyrr
       PGPASSWORD: F7Kz8DWW-qlkgz1ufePOvGwj_5pkX__c
       PGDATABASE: ampofyrr
+      OKTA_CLIENT_ID: 0oa8ca5qzisr1TtZ75d7
+      OKTA_REDIRECT_URI: http://localhost:3000/login/callback
+      OKTA_ISSUER: https://dev-21459342.okta.com/oauth2/default
+      OKTA_CLIENT_SECRET: JDcUsSnQgaQuLf9R9Yd4LrcurCybudW5IT3D1985
+      DATABASE_URL: mongodb+srv://aajulibe:VjJecT3Nxl8U8HXU@moivesdb.eqgbwes.mongodb.net/?retryWrites=true&w=majority
+      SESSION_KEY: thisisasecretkeyone
+      JAVA_SERVER_BASER_URL: https://q02j6bblzd.execute-api.eu-west-3.amazonaws.com/Prod
+
+resources:
+  Resources:
+    MovieDbBackendApiGatewayProxyResource:
+      Type: 'AWS::ApiGateway::Resource'
+      Properties:
+        RestApiId: ${self:provider.MovieRestApiId}
+        ParentId: ${self:provider.MovieDbBackendApiGateway}
+        PathPart: ${self:provider.MovieRestApiResourceName}
+    MovieDbBackendApiGatewayProxyMethod:
+      Type: 'AWS::ApiGateway::Method'
+      Properties:
+        RestApiId: ${self:provider.MovieRestApiId}
+        ResourceId: !Ref MovieDbBackendApiGatewayProxyResource
+        HttpMethod: ANY
+        AuthorizationType: NONE
+        Integration:
+          Type: AWS_PROXY
+          IntegrationHttpMethod: ANY
+          Uri: !Sub
+            - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${LambdaFunctionArn}/invocations
+            - LambdaFunctionArn: !GetAtt [ApiLambdaFunction, Arn]
+        MethodResponses:
+          - StatusCode: '200'
+  Outputs:
+    MovieDbBackendApiGatewayProxyUrl:
+      Value: !Sub 'https://${self:provider.MovieDbBackendApiGateway}.execute-api.${AWS::Region}.amazonaws.com/${self:provider.stage}/${self:provider.MovieRestApiResourceName}/{proxy+}'
 
 plugins:
   - serverless-plugin-typescript
