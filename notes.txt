@@ -14,3 +14,7 @@ to start mongo db use the command: mongosh
 
 todo:
 configure CI/CD for this
+
+
+DEPLOYING
+Always build before you deploy

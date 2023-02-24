@@ -15,7 +15,9 @@ functions:
   api:
     handler: handler.api
     events:
-      - http: ANY /{proxy+}
+      - http:
+          path: xp-ratings/{proxy+}
+          method: ANY
     environment:
       JWT_TOKEN: thisisatokenfromme
       NODE_ENV: development
@@ -34,7 +36,7 @@ functions:
       DATABASE_URL: mongodb+srv://aajulibe:VjJecT3Nxl8U8HXU@moivesdb.eqgbwes.mongodb.net/?retryWrites=true&w=majority
       SESSION_KEY: thisisasecretkeyone
       JAVA_SERVER_BASER_URL: https://q02j6bblzd.execute-api.eu-west-3.amazonaws.com/Prod
-
+# creating a new resource attached the already existing api-gateway for the spring boot application
 resources:
   Resources:
     MovieDbBackendApiGatewayProxyResource:
